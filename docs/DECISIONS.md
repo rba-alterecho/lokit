@@ -4,7 +4,7 @@ Decisões técnicas deste repositório, com data e razão. O repositório é sep
 do `imoboemia`, portanto precisa de memória própria. As decisões de negócio
 continuam em `memory/decisions.md` desse repositório.
 
-## 2026-09-01 (1) Pilha igual à do ImoCheck
+## 2026-09-04 (1) Pilha igual à do ImoCheck
 
 **Decisão**: Next.js 16 com App Router, TypeScript, Tailwind v4, Cloudflare
 Workers via OpenNext, Supabase para dados.
@@ -18,7 +18,7 @@ páginas informativas. Rejeitada porque o site vai precisar de backend real
 (contactos hoje, unidades e disponibilidade amanhã, fluxo de aluguer depois), e
 migrar a meio custaria mais do que a diferença de peso.
 
-## 2026-09-01 (2) Porta e adaptadores para a plataforma de cacifos
+## 2026-09-04 (2) Porta e adaptadores para a plataforma de cacifos
 
 **Decisão**: nenhum código fala com a plataforma directamente. Tudo passa por
 `lib/lockers/port.ts`, com um adaptador de exemplo hoje e o da MicroIO quando
@@ -31,7 +31,7 @@ descartaram quatro neste projecto, portanto a probabilidade não é baixa.
 **Consequência**: `tests/lockers-contrato.test.ts` corre a mesma bateria contra
 cada implementação. Um adaptador só é usado depois de passar.
 
-## 2026-09-01 (3) As rotas de QR são nossas, desde o primeiro dia
+## 2026-09-04 (3) As rotas de QR são nossas, desde o primeiro dia
 
 **Decisão**: `lokit.pt/l/<codigo>`, com o destino em base de dados e nunca no
 URL.
@@ -41,7 +41,7 @@ fornecedor, mudar de plataforma obrigaria a substituir os autocolantes de todos
 os cacifos. Guardar o destino em tabela impede também que o endereço seja usado
 como redireccionamento aberto.
 
-## 2026-09-01 (4) CSP com nonce, e páginas dinâmicas como consequência
+## 2026-09-04 (4) CSP com nonce, e páginas dinâmicas como consequência
 
 **Decisão**: Content-Security-Policy com nonce por pedido, gerada no `proxy.ts`,
 a arrancar em Report-Only.
@@ -58,7 +58,7 @@ acrescentá-la a um site já feito; aqui custa uma tarde.
 **A rever se**: o tráfego crescer ao ponto de a renderização por pedido pesar.
 Nesse caso, avaliar CSP por hashes nas páginas estáticas.
 
-## 2026-09-01 (5) `proxy.ts` em vez de `middleware.ts`
+## 2026-09-04 (5) `proxy.ts` em vez de `middleware.ts`
 
 **Decisão**: usar a convenção nova do Next 16.
 
@@ -70,7 +70,7 @@ cabeçalhos), portanto a exposição é baixa.
 uma política estática sem nonce, e aceitar `unsafe-inline` nos estilos mas não
 nos scripts, ou voltar a `middleware.ts`.
 
-## 2026-09-01 (6) A regra de escrita virou teste
+## 2026-09-04 (6) A regra de escrita virou teste
 
 **Decisão**: `scripts/verificar-copy.mjs`, chamado pelo `npm test`, falha se
 aparecer um travessão longo, um travessão curto ou um ponto médio em texto.
@@ -79,7 +79,7 @@ aparecer um travessão longo, um travessão curto ou um ponto médio em texto.
 em grande escala. Uma regra que depende de alguém se lembrar falha ao terceiro
 ficheiro escrito à pressa. Esta não depende.
 
-## 2026-09-01 (7) Paleta corrigida por contraste, não por gosto
+## 2026-09-04 (7) Paleta corrigida por contraste, não por gosto
 
 **Decisão**: os tons de texto secundário foram escurecidos e o texto sobre o
 verde passou a ser um token (`--lk-on-sea`), branco em claro e escuro em modo
@@ -91,7 +91,7 @@ contraste, que reprova em qualquer critério. Também se descobriu que a regra d
 link do texto corrido tinha mais especificidade do que as classes utilitárias, e
 pintava de verde o texto de um botão verde.
 
-## 2026-09-01 (8) `legacy-peer-deps` no `.npmrc`
+## 2026-09-04 (8) `legacy-peer-deps` no `.npmrc`
 
 **Facto**: `npm install` rebenta com
 `Cannot read properties of null (reading 'edgesOut')` ao resolver a árvore de
