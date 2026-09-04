@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lokit",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-03-25",
+  "compatibility_flags": ["nodejs_compat"],
+  // Preserva as variaveis definidas no dashboard do Cloudflare entre deploys.
+  // Sem isto, um deploy a partir do CI podia apagar segredos criados a mao.
+  "keep_vars": true,
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+  // KV para o limite de ritmo dos formularios. Criar com:
+  //   npx wrangler kv namespace create RATE_LIMIT
+  // e depois descomentar com o id devolvido. Sem este binding o limite passa
+  // a ser por instancia (ver lib/ratelimit.ts), que e mais fraco mas nao parte.
+  // "kv_namespaces": [{ "binding": "RATE_LIMIT", "id": "<id>" }]
+}

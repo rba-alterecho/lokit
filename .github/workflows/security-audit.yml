@@ -1,0 +1,42 @@
+# Auditoria semanal de dependencias. Nao bloqueia deploys: e um radar, nao um
+# travao.
+#
+# O portao e o que chega aos visitantes (dependencias de producao). As
+# vulnerabilidades so de ferramentas de desenvolvimento sao listadas para
+# consciencia, mas nao fazem o run falhar: nao vao no pacote publicado.
+#
+# Excepcoes conscientes vivem em .github/audit-allowlist.json, cada uma com
+# razao e data de revisao. Um aviso novo, ou uma excepcao fora de prazo, faz o
+# run ficar vermelho.
+name: security-audit
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # segundas, 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Produção, portão
+        run: |
+          npm audit --json --omit=dev > audit-prod.json || true
+          node .github/scripts/audit-check.mjs .github/audit-allowlist.json < audit-prod.json
+
+      - name: Desenvolvimento, informativo
+        if: always()
+        run: |
+          echo "Estas não vão para produção: linters, tipos, ferramentas de build."
+          npm audit --audit-level=high || true

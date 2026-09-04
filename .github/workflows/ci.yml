@@ -1,0 +1,81 @@
+# CI do site Lokit. Corre a cada push e, quando o ramo e o main e tudo estiver
+# verde, publica no Cloudflare Workers.
+#
+# As actions estao fixadas por SHA e nao por etiqueta. Uma etiqueta como @v5
+# pode ser reapontada por quem a controla, e nesse dia a nossa CI passa a
+# correr codigo diferente sem nada mudar no repositorio.
+name: ci
+
+on:
+  push:
+  pull_request:
+  # Disparo manual. Existe porque houve dias em que o GitHub simplesmente nao
+  # criou corridas para pushes, e sem isto nao havia forma de repor o deploy
+  # sem inventar um commit vazio.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    # Sem limite, um runner encravado fica ate ao defeito de seis horas a
+    # gastar minutos e a bloquear a fila.
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Tipos
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes
+        run: npm test
+
+      - name: Build
+        # A build so precisa que as variaveis publicas existam para compilar.
+        # Nenhum servico real e contactado.
+        env:
+          NEXT_PUBLIC_SITE_URL: https://lokit.pt
+        run: npm run build
+
+  deploy:
+    # So depois de tudo verde, e apenas no main.
+    needs: verificar
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      group: lokit-deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Construir para Cloudflare
+        run: npm run cf-build
+
+      - name: Publicar
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy

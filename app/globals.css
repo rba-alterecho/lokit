@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Identidade visual provisoria.
+
+   O Lokit ainda nao tem logotipo nem manual de marca (decisao 05 do plano do
+   site). Ate haver, o site assenta numa paleta sobria de mar e areia, que e o
+   sitio onde os primeiros cacifos vao estar, e numa unica familia tipografica
+   bem trabalhada. Quando a identidade existir, muda-se aqui e o site inteiro
+   acompanha.
+--------------------------------------------------------------------------- */
+
+:root {
+  --lk-ground: #f4f6f4;
+  --lk-surface: #ffffff;
+  --lk-surface-2: #eaeeeb;
+  --lk-ink: #0d2429;
+  --lk-ink-2: #47605f;
+  --lk-ink-3: #556d6b;
+  --lk-rule: #d5dcd8;
+  --lk-sea: #0f6f63;
+  --lk-sea-strong: #0a5148;
+  /* Cor do texto por cima do verde. Em claro e branco; em escuro o verde
+     aclara e o branco por cima dele fica com 2,2 de contraste, que reprova
+     em qualquer teste. Por isso e um token, e nao "text-white" fixo. */
+  --lk-on-sea: #ffffff;
+  --lk-sea-soft: #dcebe6;
+  --lk-sand: #e7e0d0;
+  --lk-signal: #8a5806;
+  --lk-signal-soft: #f6eddb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lk-ground: #081214;
+    --lk-surface: #0f1e21;
+    --lk-surface-2: #15272b;
+    --lk-ink: #e6edeb;
+    --lk-ink-2: #a4b7b4;
+    --lk-ink-3: #7d918f;
+    --lk-rule: #22383b;
+    --lk-sea: #4fc0ad;
+    --lk-sea-strong: #7fd6c6;
+    --lk-on-sea: #081214;
+    --lk-sea-soft: #12302c;
+    --lk-sand: #2a2820;
+    --lk-signal: #e0a13f;
+    --lk-signal-soft: #2b2314;
+  }
+}
+
+@theme inline {
+  --color-ground: var(--lk-ground);
+  --color-surface: var(--lk-surface);
+  --color-surface-2: var(--lk-surface-2);
+  --color-ink: var(--lk-ink);
+  --color-ink-2: var(--lk-ink-2);
+  --color-ink-3: var(--lk-ink-3);
+  --color-rule: var(--lk-rule);
+  --color-sea: var(--lk-sea);
+  --color-sea-strong: var(--lk-sea-strong);
+  --color-sea-soft: var(--lk-sea-soft);
+  --color-on-sea: var(--lk-on-sea);
+  --color-sand: var(--lk-sand);
+  --color-signal: var(--lk-signal);
+  --color-signal-soft: var(--lk-signal-soft);
+  --font-sans: var(--font-archivo), system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  background: var(--lk-ground);
+  color: var(--lk-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco sempre visivel. Um site que se navega a teclado e um site que se
+   consegue usar, e e tambem o que as entidades publicas verificam. */
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--lk-sea);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  letter-spacing: -0.018em;
+}
+
+/* Texto corrido das paginas de conteudo e legais. */
+.prosa p,
+.prosa li {
+  color: var(--lk-ink-2);
+  max-width: 68ch;
+}
+.prosa p {
+  margin-bottom: 1rem;
+  line-height: 1.65;
+}
+.prosa h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 2.25rem 0 0.75rem;
+  color: var(--lk-ink);
+}
+.prosa h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--lk-ink);
+}
+.prosa ul,
+.prosa ol {
+  margin: 0 0 1rem 1.15rem;
+  line-height: 1.65;
+}
+.prosa ul {
+  list-style: disc;
+}
+.prosa ol {
+  list-style: decimal;
+}
+.prosa li {
+  margin-bottom: 0.4rem;
+}
+/* A regra de link do texto corrido tem mais especificidade do que as classes
+   utilitarias, portanto um botao colocado dentro de um paragrafo ficava com a
+   cor de link por cima do fundo verde. O :not() abaixo deixa em paz tudo o que
+   traga fundo proprio. */
+.prosa a:not([class*='bg-']) {
+  color: var(--lk-sea-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "_comment": "Excepcoes conscientes a auditoria de dependencias. Cada entrada precisa de razao e data de revisao. Passada a data, o run fica vermelho ate alguem decidir de novo.",
+  "excepcoes": []
+}
