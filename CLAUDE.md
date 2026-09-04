@@ -2,8 +2,9 @@
 
 ## Git
 
-Trabalhar directamente em `main`. Sem branches de funcionalidade, sem PRs,
-excepto se o Ruben pedir explicitamente para isolar uma experiência.
+Trabalhar directamente em `main`. Sem branches de funcionalidade e sem PRs,
+excepto quando alguém pedir explicitamente para isolar uma experiência que
+possa partir o repositório.
 
 - No início da sessão: `git checkout main && git pull --ff-only origin main`
 - Depois de cada alteração significativa: `git add`, `git commit`, `git push origin main`
@@ -47,6 +48,6 @@ Alterações que toquem em páginas ou em cabeçalhos: correr também `npm run e
 
 ## Contexto
 
-A memória do projecto (decisões, pessoas, tarefas, estado da empresa) vive no
-repositório `imoboemia`, em `memory/`. O plano deste site está em
-`projects/lockers/plano-site.md` desse repositório.
+- `docs/plano-site.md` o plano do site, em quatro fases
+- `docs/DECISIONS.md` decisões técnicas com data e razão
+- `docs/negocio/` documentos de negócio: modelo, verticais, fornecedores, legal

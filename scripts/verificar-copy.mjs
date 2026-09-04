@@ -78,6 +78,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   for (const p of problemas) {
     console.error(`${p.ficheiro}:${p.linha}  ${p.problema}\n    ${p.excerto}\n    ${p.dica}`);
   }
-  console.error(`\n${problemas.length} ocorrência(s). Ver memory/preferences.md no repo imoboemia.`);
+  console.error(`\n${problemas.length} ocorrência(s). Ver a regra de escrita no CLAUDE.md.`);
   process.exit(1);
 }

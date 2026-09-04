@@ -6,7 +6,7 @@
 // definitiva), altera-se APENAS este ficheiro: rodape, paginas legais, emails
 // e JSON-LD passam todos a refletir os valores novos.
 //
-// Firma legal e marca sao coisas distintas, como Imoboemia e ImoCheck:
+// Firma legal e marca sao coisas distintas:
 //   firma  = IMOLOCKERS, LDA   (contratos, faturas, paginas legais)
 //   marca  = Lokit             (comunicacao, dominio, interface)
 // =============================================================================

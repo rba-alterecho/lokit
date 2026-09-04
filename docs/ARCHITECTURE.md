@@ -3,9 +3,9 @@
 ## Resumo
 
 Next.js 16 (App Router) em TypeScript, publicado em Cloudflare Workers pelo
-adaptador OpenNext, com Supabase para os dados. É a mesma pilha do ImoCheck e do
-FlytteCheck, por decisão registada: não multiplicar padrões, para que resolver
-um problema em produção não exija reaprender a plataforma.
+adaptador OpenNext, com Supabase para os dados. É a mesma pilha de outros
+projectos da equipa, por decisão registada: não multiplicar padrões, para que
+resolver um problema em produção não exija reaprender a plataforma.
 
 ## Camadas
 
@@ -37,7 +37,7 @@ Consequências práticas:
 - `tests/lockers-contrato.test.ts` corre a mesma bateria contra cada
   implementação. Se a real não cumprir o contrato, a CI apanha antes de produção.
 - Se um dia houver segundo fornecedor de hardware, entra ao lado. Não é
-  hipótese remota: já se descartaram quatro fornecedores neste projecto.
+  hipótese remota: no processo de escolha foram descartados quatro.
 
 ### Perguntas por responder à MicroIO
 

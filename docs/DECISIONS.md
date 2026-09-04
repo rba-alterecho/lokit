@@ -1,17 +1,19 @@
 # Decisões
 
-Decisões técnicas deste repositório, com data e razão. O repositório é separado
-do `imoboemia`, portanto precisa de memória própria. As decisões de negócio
-continuam em `memory/decisions.md` desse repositório.
+Decisões técnicas deste repositório, com data e razão. Quem chegar daqui a seis
+meses, ou de fora, precisa de saber porque é que as coisas estão como estão, e
+não só que estão.
 
-## 2026-09-04 (1) Pilha igual à do ImoCheck
+## 2026-09-04 (1) A pilha é a que já se conhece
 
 **Decisão**: Next.js 16 com App Router, TypeScript, Tailwind v4, Cloudflare
 Workers via OpenNext, Supabase para dados.
 
-**Razão**: já existe conhecimento acumulado, um formato de CI que funciona, e
-módulos pensados (`company.ts`, `env.ts`, `alert.ts`, `email.ts`). Não
-multiplicar padrões é uma decisão anterior deste grupo, de 2026-06-13.
+**Razão**: é a mesma pilha de outros projectos da equipa, com conhecimento
+acumulado, um formato de CI que funciona e módulos já pensados (`company.ts`,
+`env.ts`, `alert.ts`, `email.ts`). Não multiplicar padrões é uma regra
+assumida: resolver um problema em produção não deve exigir reaprender a
+plataforma.
 
 **Alternativa considerada**: Astro estático em Cloudflare Pages, mais leve para
 páginas informativas. Rejeitada porque o site vai precisar de backend real
@@ -25,8 +27,8 @@ migrar a meio custaria mais do que a diferença de peso.
 houver API.
 
 **Razão**: permite construir e testar o site inteiro sem acesso à API, que é a
-situação real. E se um dia entrar outro fornecedor, entra ao lado: já se
-descartaram quatro neste projecto, portanto a probabilidade não é baixa.
+situação real. E se um dia entrar outro fornecedor, entra ao lado: no processo
+de escolha foram descartados quatro, portanto a probabilidade não é baixa.
 
 **Consequência**: `tests/lockers-contrato.test.ts` corre a mesma bateria contra
 cada implementação. Um adaptador só é usado depois de passar.
@@ -52,8 +54,8 @@ build.
 
 **Razão**: a alternativa era `unsafe-inline` nos scripts, que é o mesmo que não
 ter CSP. Num site deste tamanho, servido no edge, o custo da renderização por
-pedido é baixo. No ImoCheck a CSP ficou de fora precisamente por ser difícil
-acrescentá-la a um site já feito; aqui custa uma tarde.
+pedido é baixo. Acrescentar uma CSP a um site já feito é caro e parte produção
+com facilidade; num site novo custa uma tarde.
 
 **A rever se**: o tráfego crescer ao ponto de a renderização por pedido pesar.
 Nesse caso, avaliar CSP por hashes nas páginas estáticas.
@@ -75,9 +77,9 @@ nos scripts, ou voltar a `middleware.ts`.
 **Decisão**: `scripts/verificar-copy.mjs`, chamado pelo `npm test`, falha se
 aparecer um travessão longo, um travessão curto ou um ponto médio em texto.
 
-**Razão**: a regra existe desde 2026-06-12 e foi quebrada duas vezes, a segunda
-em grande escala. Uma regra que depende de alguém se lembrar falha ao terceiro
-ficheiro escrito à pressa. Esta não depende.
+**Razão**: uma regra de escrita que depende de alguém se lembrar falha ao
+terceiro ficheiro escrito à pressa. Já foi quebrada antes, em escala, e a
+correcção à mão no fim é sempre pior do que não escrever assim de início.
 
 ## 2026-09-04 (7) Paleta corrigida por contraste, não por gosto
 

@@ -50,11 +50,10 @@ docs/         arquitectura, segurança, operação, decisões
 
 ## Documentação
 
-- `docs/SETUP.md` passos de dashboard, um a um
+- `docs/plano-site.md` o plano do site, em quatro fases
+- `docs/SETUP.md` passos de painel, um a um
 - `docs/ARCHITECTURE.md` como está montado e porquê
 - `docs/SECURITY.md` o que está protegido e como
 - `docs/RUNBOOK.md` sintoma e acção quando algo corre mal
 - `docs/DECISIONS.md` decisões técnicas com data e razão
-
-O plano completo do site vive no repositório `imoboemia`, em
-`projects/lockers/plano-site.md`.
+- `docs/negocio/` modelo comercial, verticais, fornecedores, legal

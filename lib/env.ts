@@ -2,8 +2,8 @@
 //
 // Porque existe: o painel da Cloudflare aceita nomes de secrets com espacos no
 // inicio ou no fim. Um " TURNSTILE_SECRET_KEY" colado com um espaco invisivel
-// parece perfeito na lista e o codigo nunca o encontra. Ja aconteceu no
-// ImoCheck e custou o primeiro pagamento real.
+// parece perfeito na lista e o codigo nunca o encontra. Ja aconteceu antes,
+// noutro projecto, e custou um pagamento real.
 //
 // Preferimos sempre o nome exacto. So se nao existir e que procuramos uma
 // chave que, aparada, seja igual, e avisamos no log para o nome acabar por

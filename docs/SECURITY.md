@@ -63,8 +63,8 @@ depois estraga também os emails transaccionais.
 - Segredos de produção nos secrets do Worker, com `keep_vars` no
   `wrangler.jsonc` para nenhum deploy os apagar.
 - Rotação anual por rotina, imediata em caso de exposição ou de saída de alguém.
-  Há precedente próprio: em maio de 2026 uma chave `sk_live` ficou exposta noutro
-  projecto e a limpeza arrastou-se meses.
+  Uma chave de pagamento exposta obriga a rodar tudo o que ela tocava, e a
+  limpeza arrasta-se durante meses. Vale a pena não chegar lá.
 
 ### Dados
 
